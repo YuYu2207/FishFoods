@@ -298,11 +298,92 @@
                         <div class="avatar-head"></div>
                         <div class="avatar-body"></div>
                     </div>
+                    <div class="avatar-login-text">登录</div>
                 </div>
                 <div class="profile-menu">
                     <div class="menu-item" data-menu="points">我的积分</div>
                     <div class="menu-item" data-menu="member">我的会员</div>
-                    <div class="menu-item" data-menu="settings">设置</div>
+                    <div class="menu-item" data-menu="settings" data-no-login="true">设置</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 设置页面 -->
+        <div id="settingsPage" class="page">
+            <div class="profile-container">
+                <h2 class="profile-title">鱼鱼点餐设置</h2>
+                <div class="profile-menu">
+                    <div class="menu-item" id="adminLoginBtn">管理员登录</div>
+                    <div class="menu-item" id="adminFunctionBtn" style="display: none;">管理员功能</div>
+                    <div class="menu-item" id="backToProfileBtn">返回</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 管理员功能页面 -->
+        <div id="adminPage" class="page">
+            <div class="profile-container">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px;">
+                    <button id="backToSettingsBtn" class="close-btn">×</button>
+                    <h2 class="profile-title">管理员功能</h2>
+                    <div style="width: 30px;"></div>
+                </div>
+                <div class="profile-menu">
+                    <div class="menu-item" id="manageDishesBtn">管理菜品</div>
+                    <div class="menu-item" id="addDishBtn">添加菜品</div>
+                    <div class="menu-item" id="manageUsersBtn">用户管理</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 用户列表页面 -->
+        <div id="userListPage" class="page">
+            <div class="profile-container">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px;">
+                    <button id="backToAdminBtn" class="close-btn">×</button>
+                    <h2 class="profile-title">用户列表</h2>
+                    <div style="width: 30px;"></div>
+                </div>
+                <div id="userList" style="display: flex; flex-direction: column; gap: 10px;"></div>
+            </div>
+        </div>
+
+        <!-- 菜品管理页面 -->
+        <div id="dishManagementPage" class="page">
+            <div class="profile-container">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px;">
+                    <button id="backToAdminFromDishBtn" class="close-btn">×</button>
+                    <h2 class="profile-title">菜品管理</h2>
+                    <div style="width: 30px;"></div>
+                </div>
+                <div id="dishList" style="display: flex; flex-direction: column; gap: 15px;"></div>
+            </div>
+        </div>
+
+        <!-- 菜品编辑弹窗 -->
+        <div id="editDishModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>编辑菜品</h2>
+                    <button id="closeEditDish" class="close-btn">×</button>
+                </div>
+                <div class="login-form">
+                    <div class="form-group">
+                        <label>菜品名称</label>
+                        <input type="text" id="editDishName" placeholder="请输入菜品名称">
+                    </div>
+                    <div class="form-group">
+                        <label>菜品价格</label>
+                        <input type="number" id="editDishPrice" placeholder="请输入菜品价格" min="0.01" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>菜品描述</label>
+                        <input type="text" id="editDishDesc" placeholder="请输入菜品描述">
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <button id="cancelEditDish" class="close-btn" style="flex: 1;">取消</button>
+                        <button id="saveEditDish" class="login-btn" style="flex: 1;">确认</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -400,6 +481,69 @@
                     <button id="forgotSubmitBtn" class="login-btn">确认</button>
                     <div id="loadingSpinner" class="loading-spinner"></div>
                     <div id="forgotResult" class="result-message"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 管理员登录弹窗 -->
+        <div id="adminLoginModal" class="modal">
+            <div class="modal-content login-modal">
+                <div class="modal-header">
+                    <h2>管理员登录</h2>
+                    <button id="closeAdminLogin" class="close-btn">×</button>
+                </div>
+                <div class="login-form">
+                    <div class="form-group">
+                        <label>管理员账户</label>
+                        <input type="text" id="adminUsername" placeholder="请输入管理员账户">
+                    </div>
+                    <div class="form-group">
+                        <label>管理员密码</label>
+                        <div class="password-input">
+                            <input type="password" id="adminPassword" placeholder="请输入管理员密码">
+                            <button id="toggleAdminPassword" class="toggle-password">👁️</button>
+                        </div>
+                    </div>
+                    <button id="adminLoginSubmitBtn" class="login-btn">验证</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 添加菜品弹窗 -->
+        <div id="addDishModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>添加菜品</h2>
+                    <button id="closeAddDish" class="close-btn">×</button>
+                </div>
+                <div class="login-form">
+                    <div class="form-group">
+                        <label>菜品名称</label>
+                        <input type="text" id="dishName" placeholder="请输入菜品名称">
+                    </div>
+                    <div class="form-group">
+                        <label>菜品价格</label>
+                        <input type="number" id="dishPrice" placeholder="请输入菜品价格" min="0" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>菜品分类</label>
+                        <select id="dishCategory">
+                            <option value="hot">热菜</option>
+                            <option value="cold">凉菜</option>
+                            <option value="soup">汤品</option>
+                            <option value="staple">主食</option>
+                            <option value="drink">饮品</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>菜品描述</label>
+                        <input type="text" id="dishDesc" placeholder="请输入菜品描述">
+                    </div>
+                    <div class="form-group">
+                        <label>菜品图片（可选）</label>
+                        <input type="file" id="dishImage" accept="image/*">
+                    </div>
+                    <button id="addDishSubmitBtn" class="login-btn">确认</button>
                 </div>
             </div>
         </div>

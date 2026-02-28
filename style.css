@@ -419,7 +419,8 @@ body {
 
 .user-avatar {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     margin-bottom: 40px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -429,30 +430,44 @@ body {
     transform: scale(0.95);
 }
 
+.avatar-login-text {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #999;
+}
+
 .avatar-default {
     width: 100px;
-    height: 120px;
+    height: 100px;
     position: relative;
+    border: 3px solid #ff7a45;
+    border-radius: 50%;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="47" fill="%23fff" stroke="%23ff7a45" stroke-width="3"/></svg>');
+    background-size: cover;
 }
 
 .avatar-head {
-    width: 80px;
-    height: 80px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background-color: #ff7a45;
     position: absolute;
-    top: 0;
-    left: 10px;
+    top: 15px;
+    left: 27px;
 }
 
 .avatar-body {
-    width: 60px;
-    height: 60px;
+    width: 30px;
+    height: 30px;
     background-color: #ff7a45;
     clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
     position: absolute;
-    top: 70px;
-    left: 20px;
+    top: 55px;
+    left: 32px;
 }
 
 .profile-menu {
@@ -462,7 +477,7 @@ body {
 }
 
 .menu-item {
-    padding: 20px;
+    padding: 15px;
     background-color: #fafafa;
     border-radius: 8px;
     font-size: 16px;
@@ -475,6 +490,17 @@ body {
     background-color: #f0f0f0;
 }
 
+/* 管理员功能页面样式 */
+#adminPage .profile-menu .menu-item {
+    padding: 15px;
+    font-size: 15px;
+}
+
+#adminPage .profile-title {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
 /* 登录/注册/找回密码弹窗 */
 .login-modal,
 .register-modal,
@@ -484,9 +510,7 @@ body {
 }
 
 .modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    position: relative;
     margin-bottom: 30px;
 }
 
@@ -494,9 +518,13 @@ body {
     margin: 0;
     font-size: 18px;
     color: #333;
+    text-align: center;
 }
 
 .modal-header .close-btn {
+    position: absolute;
+    top: -10px;
+    left: -10px;
     background: none;
     border: none;
     font-size: 24px;
@@ -797,17 +825,35 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: calc(100vh - 60px);
+    min-height: calc(100vh - 60px);
     opacity: 0;
     visibility: hidden;
     transform: translateX(100%);
     transition: all 0.3s ease;
+    overflow-x: hidden;
+    display: none;
 }
 
 .page.active {
     opacity: 1;
     visibility: visible;
     transform: translateX(0);
+    display: block;
+}
+
+/* 点餐页面特殊处理 */
+#orderPage {
+    height: calc(100vh - 60px);
+    overflow: hidden;
+}
+
+#orderPage .order-container {
+    height: 100%;
+    display: flex;
+}
+
+#orderPage .food-list {
+    overflow-y: auto;
 }
 
 /* 响应式设计 */
