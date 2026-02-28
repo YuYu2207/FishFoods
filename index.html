@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>YuYU点餐</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 主容器 -->
+    <div class="container">
+        <!-- 用餐人数选择弹窗 -->
+        <div id="peopleModal" class="modal">
+            <div class="modal-content people-modal">
+                <h2>选择用餐人数</h2>
+                <div class="dial-pad">
+                    <div class="dial-row">
+                        <button class="dial-btn" data-number="1">1</button>
+                        <button class="dial-btn" data-number="2">2</button>
+                        <button class="dial-btn" data-number="3">3</button>
+                    </div>
+                    <div class="dial-row">
+                        <button class="dial-btn" data-number="4">4</button>
+                        <button class="dial-btn" data-number="5">5</button>
+                        <button class="dial-btn" data-number="6">6</button>
+                    </div>
+                    <div class="dial-row">
+                        <button class="dial-btn" data-number="7">7</button>
+                        <button class="dial-btn" data-number="8">8</button>
+                        <button class="dial-btn" data-number="9">9</button>
+                    </div>
+                </div>
+                <div class="selected-people">
+                    <span>已选择：</span>
+                    <span id="peopleCount">0</span> 人
+                </div>
+                <button id="confirmPeople" class="confirm-btn">确认</button>
+                <div id="skipPeople" class="skip-btn">先看看，暂不选择</div>
+            </div>
+        </div>
+
+        <!-- 点餐页面 -->
+        <div id="orderPage" class="page active">
+            <div class="order-container">
+                <!-- 左侧食物种类 -->
+                <div class="food-categories">
+                    <div class="category-item active" data-category="all">全部</div>
+                    <div class="category-item" data-category="hot">热菜</div>
+                    <div class="category-item" data-category="cold">凉菜</div>
+                    <div class="category-item" data-category="soup">汤品</div>
+                    <div class="category-item" data-category="staple">主食</div>
+                    <div class="category-item" data-category="drink">饮品</div>
+                    <div class="category-slider"></div>
+                </div>
+                <!-- 右侧食物卡片 -->
+                <div class="food-list">
+                    <!-- 全部分类 -->
+                    <div class="category-section" data-category="all">
+                        <h2>最近热销</h2>
+                        <div class="food-card" data-category="hot">
+                            <div class="food-image"></div>
+                            <div class="food-info">
+                                <h3>宫保鸡丁</h3>
+                                <p>经典川菜，鸡肉嫩滑，花生香脆</p>
+                                <div class="food-price">¥28</div>
+                            </div>
+                            <button class="add-btn">+</button>
+                        </div>
+                        <div class="food-card" data-category="hot">
+                            <div class="food-image"></div>
+                            <div class="food-info">
+                                <h3>麻婆豆腐</h3>
+                                <p>四川特色，豆腐嫩滑，麻辣鲜香</p>
+                                <div class="food-price">¥22</div>
+                            </div>
+                            <button class="add-btn">+</button>
+                        </div>
+                        <div class="food-card" data-category="cold">
+                            <div class="food-image"></div>
+                            <div class="food-info">
+                                <h3>拍黄瓜</h3>
+                                <p>清爽可口，开胃小菜</p>
+                                <div class="food-price">¥12</div>
+                            </div>
+                            <button class="add-btn">+</button>
+                        </div>
+                        <div class="food-card" data-category="soup">
+                            <div class="food-image"></div>
+                            <div class="food-info">
+                                <h3>酸辣汤</h3>
+                                <p>酸辣可口，开胃健脾</p>
+                                <div class="food-price">¥18</div>
+                            </div>
+                            <button class="add-btn">+</button>
+                        </div>
+                    </div>
+                    <!-- 热菜分类 -->
+                    <div class="category-section" data-category="hot">
+                        <h2>热菜</h2>
+                        <div class="food-card">
+                            <div class="food-image"></div>
+                            <div class="food-info">
+                                <h3>宫保鸡丁</h3>
+                                <p>经典川菜，鸡肉嫩滑，花生香脆</p>
+                                <div class="food-price">¥28</div>
+                            </div>
+                            <button class="add-btn">+</button>
+                        </div>
+                        <div class="food-card">
+                            <div class="food-image"></div>
+                            <div class="food-info">
+                                <h3>麻婆豆腐</h3>
+                                <p>四川特色，豆腐嫩滑，麻辣鲜香</p>
+                                <div class="food-price">¥22</div>
+                            </div>
+                            <button class="add-btn">+</button>
+                        </div>
+                        <div class="food-card">
+                            <div class="food-image"></div>
+                            <div class="food-info">
+                                <h3>鱼香肉丝</h3>
+                                <p>甜酸辣味，肉丝鲜嫩，配菜丰富</p>
+                                <div class="food-price">¥26</div>
+                            </div>
+                            <button class="add-btn">+</button>
+                        </div>
+                        <div class="food-card">
+                            <div class="food-image"></div>
+                            <div class="food-info">
+                                <h3>糖醋排骨</h3>
+                                <p>酸甜可口，排骨酥烂，老少皆宜</p>
+                                <div class="food-price">¥32</div>
+                            </div>
+                            <button class="add-btn">+</button>
+                        </div>
+                        <div class="food-card">
+                            <div class="food-image"></div>
+                            <div class="food-info">
+                                <h3>红烧肉</h3>
+                                <p>肥而不腻，入口即化</p>
+                                <div class="food-price">¥38</div>
+                            </div>
+                            <button class="add-btn">+</button>
+                        </div>
+                    </div>
+                    <!-- 凉菜分类 -->
+                    <div class="category-section" data-category="cold">
+                        <h2>凉菜</h2>
+                        <div class="food-card">
+                            <div class="food-image"></div>
+                            <div class="food-info">
+                                <h3>拍黄瓜</h3>
+                                <p>清爽可口，开胃小菜</p>
+                                <div class="food-price">¥12</div>
+                            </div>
+                            <button class="add-btn">+</button>
+                        </div>
+                        <div class="food-card">
+                            <div class="food-image"></div>
+                            <div class="food-info">
+                                <h3>凉拌木耳</h3>
+                                <p>爽口开胃，营养丰富</p>
+                                <div class="food-price">¥16</div>
+                            </div>
+                            <button class="add-btn">+</button>
+                        </div>
+                        <div class="food-card">
+                            <div class="food-image"></div>
+                            <div class="food-info">
+                                <h3>夫妻肺片</h3>
+                                <p>四川特色，麻辣鲜香</p>
+                                <div class="food-price">¥28</div>
+                            </div>
+                            <button class="add-btn">+</button>
+                        </div>
+                    </div>
+                    <!-- 汤品分类 -->
+                    <div class="category-section" data-category="soup">
+                        <h2>汤品</h2>
+                        <div class="food-card">
+                            <div class="food-image"></div>
+                            <div class="food-info">
+                                <h3>酸辣汤</h3>
+                                <p>酸辣可口，开胃健脾</p>
+                                <div class="food-price">¥18</div>
+                            </div>
+                            <button class="add-btn">+</button>
+                        </div>
+                        <div class="food-card">
+                            <div class="food-image"></div>
+                            <div class="food-info">
+                                <h3>番茄鸡蛋汤</h3>
+                                <p>酸甜可口，营养丰富</p>
+                                <div class="food-price">¥15</div>
+                            </div>
+                            <button class="add-btn">+</button>
+                        </div>
+                        <div class="food-card">
+                            <div class="food-image"></div>
+                            <div class="food-info">
+                                <h3>排骨莲藕汤</h3>
+                                <p>汤清味鲜，营养滋补</p>
+                                <div class="food-price">¥28</div>
+                            </div>
+                            <button class="add-btn">+</button>
+                        </div>
+                    </div>
+                    <!-- 主食分类 -->
+                    <div class="category-section" data-category="staple">
+                        <h2>主食</h2>
+                        <div class="food-card">
+                            <div class="food-image"></div>
+                            <div class="food-info">
+                                <h3>米饭</h3>
+                                <p>香软可口，粒粒分明</p>
+                                <div class="food-price">¥3</div>
+                            </div>
+                            <button class="add-btn">+</button>
+                        </div>
+                        <div class="food-card">
+                            <div class="food-image"></div>
+                            <div class="food-info">
+                                <h3>馒头</h3>
+                                <p>松软可口，麦香浓郁</p>
+                                <div class="food-price">¥2</div>
+                            </div>
+                            <button class="add-btn">+</button>
+                        </div>
+                        <div class="food-card">
+                            <div class="food-image"></div>
+                            <div class="food-info">
+                                <h3>面条</h3>
+                                <p>筋道爽口，口感丰富</p>
+                                <div class="food-price">¥10</div>
+                            </div>
+                            <button class="add-btn">+</button>
+                        </div>
+                    </div>
+                    <!-- 饮品分类 -->
+                    <div class="category-section" data-category="drink">
+                        <h2>饮品</h2>
+                        <div class="food-card">
+                            <div class="food-image"></div>
+                            <div class="food-info">
+                                <h3>可乐</h3>
+                                <p>冰镇可口，解暑佳品</p>
+                                <div class="food-price">¥8</div>
+                            </div>
+                            <button class="add-btn">+</button>
+                        </div>
+                        <div class="food-card">
+                            <div class="food-image"></div>
+                            <div class="food-info">
+                                <h3>雪碧</h3>
+                                <p>清爽可口，柠檬味浓</p>
+                                <div class="food-price">¥8</div>
+                            </div>
+                            <button class="add-btn">+</button>
+                        </div>
+                        <div class="food-card">
+                            <div class="food-image"></div>
+                            <div class="food-info">
+                                <h3>豆浆</h3>
+                                <p>营养丰富，口感细腻</p>
+                                <div class="food-price">¥6</div>
+                            </div>
+                            <button class="add-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 搜索页面 -->
+        <div id="searchPage" class="page">
+            <div class="search-container">
+                <div class="search-header">
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="搜索菜名...">
+                        <button id="searchBtn">搜索</button>
+                    </div>
+                </div>
+                <div class="search-results">
+                    <h2 id="searchTitle">搜索结果</h2>
+                    <div id="searchItems" class="food-list">
+                        <!-- 搜索结果将在这里动态添加 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 我的页面 -->
+        <div id="profilePage" class="page">
+            <div class="profile-container">
+                <h2 class="profile-title">个人账户</h2>
+                <div id="userAvatar" class="user-avatar">
+                    <div class="avatar-default">
+                        <div class="avatar-head"></div>
+                        <div class="avatar-body"></div>
+                    </div>
+                </div>
+                <div class="profile-menu">
+                    <div class="menu-item" data-menu="points">我的积分</div>
+                    <div class="menu-item" data-menu="member">我的会员</div>
+                    <div class="menu-item" data-menu="settings">设置</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 登录弹窗 -->
+        <div id="loginModal" class="modal">
+            <div class="modal-content login-modal">
+                <div class="modal-header">
+                    <h2>欢迎使用鱼鱼点餐系统</h2>
+                    <button id="closeLogin" class="close-btn">×</button>
+                </div>
+                <div class="login-form">
+                    <div class="form-group">
+                        <label>账户</label>
+                        <input type="text" id="loginUsername" placeholder="请输入账户">
+                    </div>
+                    <div class="form-group">
+                        <label>密码</label>
+                        <div class="password-input">
+                            <input type="password" id="loginPassword" placeholder="请输入密码">
+                            <button id="togglePassword" class="toggle-password">👁️</button>
+                        </div>
+                    </div>
+                    <button id="loginBtn" class="login-btn">登录</button>
+                    <div class="form-footer">
+                        <button id="forgotPasswordBtn">找回密码</button>
+                        <button id="registerBtn">注册</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 注册弹窗 -->
+        <div id="registerModal" class="modal">
+            <div class="modal-content register-modal">
+                <div class="modal-header">
+                    <h2>注册账户</h2>
+                    <button id="closeRegister" class="close-btn">×</button>
+                </div>
+                <div class="login-form">
+                    <div class="form-group">
+                        <label>用户名</label>
+                        <input type="text" id="registerUsername" placeholder="请输入用户名（最少3位数字）">
+                        <div id="usernameError" class="error-message"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>密码</label>
+                        <div class="password-input">
+                            <input type="password" id="registerPassword" placeholder="请输入密码（最少6位）">
+                            <button id="toggleRegisterPassword" class="toggle-password">👁️</button>
+                        </div>
+                        <div id="passwordError" class="error-message"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>密保问题</label>
+                        <select id="securityQuestion">
+                            <option value="1">你的父亲叫什么名字？</option>
+                            <option value="2">你的家乡是哪里？</option>
+                            <option value="3">你最喜欢的明星是？</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>密保答案</label>
+                        <input type="text" id="securityAnswer" placeholder="请输入密保答案">
+                    </div>
+                    <button id="registerSubmitBtn" class="login-btn">注册</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 找回密码弹窗 -->
+        <div id="forgotPasswordModal" class="modal">
+            <div class="modal-content forgot-password-modal">
+                <div class="modal-header">
+                    <h2>找回密码</h2>
+                    <button id="closeForgotPassword" class="close-btn">×</button>
+                </div>
+                <div class="login-form">
+                    <div class="form-group">
+                        <label>账户</label>
+                        <input type="text" id="forgotUsername" placeholder="请输入账户">
+                    </div>
+                    <div class="form-group">
+                        <label>密保问题</label>
+                        <select id="forgotSecurityQuestion">
+                            <option value="1">你的父亲叫什么名字？</option>
+                            <option value="2">你的家乡是哪里？</option>
+                            <option value="3">你最喜欢的明星是？</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>密保答案</label>
+                        <input type="text" id="forgotSecurityAnswer" placeholder="请输入密保答案">
+                    </div>
+                    <button id="forgotSubmitBtn" class="login-btn">确认</button>
+                    <div id="loadingSpinner" class="loading-spinner"></div>
+                    <div id="forgotResult" class="result-message"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 购物车悬浮窗 -->
+        <div id="cartBtn" class="cart-btn">
+            🛒
+            <span id="cartCount">0</span>
+        </div>
+
+        <!-- 购物车弹窗 -->
+        <div id="cartModal" class="modal">
+            <div class="modal-content cart-modal">
+                <h2>购物车</h2>
+                <div id="cartItems" class="cart-items">
+                    <!-- 购物车商品将在这里动态添加 -->
+                </div>
+                <div class="cart-total">
+                    <span>总计：</span>
+                    <span id="cartTotal">¥0</span>
+                </div>
+                <button id="closeCart" class="close-btn">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 珍惜粮食提示横幅 -->
+    <div id="foodWasteBanner" class="food-waste-banner">
+        请酌情点餐，珍惜粮食！！
+    </div>
+
+    <!-- 底部导航栏 -->
+    <div class="bottom-nav">
+        <button class="nav-btn active" data-page="home">主页</button>
+        <button class="nav-btn" data-page="search">搜索</button>
+        <button class="nav-btn" data-page="profile">我的</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
